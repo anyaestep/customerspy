@@ -1,7 +1,7 @@
-package com.sonicnf.customerspy.services
+package com.jacksoneh.lfeed.services
 
-import com.sonicnf.customerspy.db.SimpleMongoClient
-import com.sonicnf.customerspy.util._
+import com.jacksoneh.lfeed.db.SimpleMongoClient
+import com.jacksoneh.lfeed.util._
 import com.mongodb.casbah._
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.Bytes

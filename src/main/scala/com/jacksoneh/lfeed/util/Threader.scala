@@ -1,4 +1,4 @@
-package com.sonicnf.customerspy.util
+package com.jacksoneh.lfeed.util
 
 import concurrent.ops._
 import scala.runtime.VolatileBooleanRef

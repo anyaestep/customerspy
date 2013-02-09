@@ -1,5 +1,5 @@
 package com.sonicnf.customerspy
 
-package object util {
+package com.jacksoneh.lfeed.util {
 
 }

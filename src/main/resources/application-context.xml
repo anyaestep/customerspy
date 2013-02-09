@@ -8,12 +8,12 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
         http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-	<context:property-placeholder location="classpath:sonicnf.properties" />
+	<context:property-placeholder location="classpath:lfeed.properties" />
 
-	<bean id="mongoClient" class="com.sonicnf.customerspy.db.SimpleMongoClient">
-		<constructor-arg value="${sonicnf.analytics.host}" />
-		<constructor-arg value="${sonicnf.analytics.port}" />
-		<constructor-arg value="${sonicnf.analytics.spy.dbname}" />
+	<bean id="mongoClient" class="com.jacksoneh.lfeed.db.SimpleMongoClient">
+		<constructor-arg value="${lfeed.analytics.host}" />
+		<constructor-arg value="${lfeed.analytics.port}" />
+		<constructor-arg value="${lfeed.analytics.spy.dbname}" />
 	</bean>
 
 	<!-- start embedded broker for our cool poc -->
@@ -25,7 +25,7 @@
 	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory" destroy-method="stop">
     <property name="connectionFactory">
       <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="${sonicnf.broker.uri}"/>
+        <property name="brokerURL" value="${lfeed.broker.uri}"/>
       </bean>
     </property>
   </bean>
@@ -33,23 +33,6 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="jmsFactory"/>
 		<!-- <property name="pubSubDomain" value="true"/> -->
-	</bean>
-	
-	<bean id="imgDir" class="java.io.File">
-	<constructor-arg value="classpath:${sonicnf.util.image.store}"/>
-	</bean>
-
-	<bean id="capturer" class="com.sonicnf.customerspy.services.ActivityCapturer" init-method="init" destroy-method="destroy">
-		<constructor-arg value="${sonicnf.analytics.spy.collection}" />
-		<constructor-arg ref="mongoClient" />
-	</bean>
-
-	<bean id="feeder" class="com.sonicnf.customerspy.services.LiveFeeder" init-method="init" destroy-method="destroy">
-		<constructor-arg value="${sonicnf.analytics.spy.collection}" />
-		<constructor-arg ref="mongoClient" />
-		<constructor-arg ref="jmsTemplate" />
-		<constructor-arg value="${sonicnf.client.dashboard.livefeed.topic}" />
-
 	</bean>
 
 </beans>

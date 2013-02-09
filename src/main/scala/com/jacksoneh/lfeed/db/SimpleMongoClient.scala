@@ -1,4 +1,4 @@
-package com.sonicnf.customerspy.db
+package com.jacksoneh.lfeed.db
 
 import com.mongodb.casbah._
 
